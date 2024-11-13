@@ -13,7 +13,7 @@ import java.util.List;
 @Table(name ="asteroid")
 public class Asteroid {
     @Id
-    private int id;
+    private String id;
     private String name;
     @Column(name = "absolute_magnitude")
     private double magnitude;

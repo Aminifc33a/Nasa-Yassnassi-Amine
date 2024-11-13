@@ -19,7 +19,7 @@ public class Approach {
     private Long id;
 
     @Column(name = "approach_date")
-    private LocalDate approachDate;
+    private String approachDate;
 
     private double velocity;
     private double distance;
