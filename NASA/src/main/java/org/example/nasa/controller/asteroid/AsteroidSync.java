@@ -1,4 +1,4 @@
-package org.example.nasa.controller.Sync;
+package org.example.nasa.controller.asteroid;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -13,7 +13,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 @WebServlet("/sync-asteroids")
-public class SyncController extends HttpServlet {
+public class AsteroidSync extends HttpServlet {
     private NasaService nasaService;
 
     @Override

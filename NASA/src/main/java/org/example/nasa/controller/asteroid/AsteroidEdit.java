@@ -1,4 +1,4 @@
 package org.example.nasa.controller.asteroid;
 
-public class AsteroidController {
+public class AsteroidEdit {
 }
