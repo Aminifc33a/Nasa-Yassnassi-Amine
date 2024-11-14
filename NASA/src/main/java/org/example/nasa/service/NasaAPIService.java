@@ -5,7 +5,6 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import org.example.nasa.dao.ApproachDao;
-import org.example.nasa.dao.AsteroidDao;
 import org.example.nasa.model.Approach;
 import org.example.nasa.model.Asteroid;
 
@@ -16,14 +15,14 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-public class NasaService {
-    private final AsteroidDao asteroidDao;
-    private final ApproachDao approachDao;
+public class NasaAPIService {
+    private final AsteroidService asteroidService;
+    private final ApproachService approachService;
     private final Gson gson = new Gson();
 
-    public NasaService(AsteroidDao asteroidDao, ApproachDao approachDao) {
-        this.asteroidDao = asteroidDao;
-        this.approachDao = approachDao;
+    public NasaAPIService(AsteroidService asteroidService, ApproachService approachService) {
+        this.asteroidService = asteroidService;
+        this.approachService = approachService;
     }
 
     public void syncAsteroids() throws IOException {
@@ -42,11 +41,11 @@ public class NasaService {
             for (JsonElement asteroidJson : asteroidArray) {
                 JsonObject asteroidObject = asteroidJson.getAsJsonObject();
                 Asteroid asteroid = parseAsteroid(asteroidObject);
-                if (asteroidDao.findById(asteroid.getId()) == null) {
-                    asteroidDao.save(asteroid);
+                if (asteroidService.findById(asteroid.getId()) == null) {
+                    asteroidService.save(asteroid);
                 }
                 List<Approach> approaches = parseApproaches(asteroidObject, asteroid);
-                approaches.forEach(approachDao::save);
+                approaches.forEach(approachService::save);
             }
         }
     }

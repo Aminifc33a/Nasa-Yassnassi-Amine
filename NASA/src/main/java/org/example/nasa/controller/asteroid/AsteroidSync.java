@@ -4,27 +4,25 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
-import org.example.nasa.dao.ApproachDao;
-import org.example.nasa.dao.AsteroidDao;
-import org.example.nasa.dao.JPA.ApproachDaoImpl;
-import org.example.nasa.dao.JPA.AsteroidDaoImpl;
-import org.example.nasa.service.NasaService;
+import org.example.nasa.service.ApproachService;
+import org.example.nasa.service.AsteroidService;
+import org.example.nasa.service.NasaAPIService;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 @WebServlet("/sync-asteroids")
 public class AsteroidSync extends HttpServlet {
-    private NasaService nasaService;
+    private NasaAPIService nasaAPIService;
 
     @Override
     public void init() throws ServletException {
-        AsteroidDao asteroidDao = new AsteroidDaoImpl();
-        ApproachDao approachDao = new ApproachDaoImpl();
-        nasaService = new NasaService(asteroidDao, approachDao);
+        AsteroidService asteroidService = new AsteroidService();
+        ApproachService approachService = new ApproachService();
+        nasaAPIService = new NasaAPIService(asteroidService, approachService);
     }
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        nasaService.syncAsteroids();
+        nasaAPIService.syncAsteroids();
         resp.sendRedirect(req.getContextPath() + "/asteroids"); // Redirige al listado de asteroides
     }
 }
