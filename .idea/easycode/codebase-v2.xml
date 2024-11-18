@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="com.obiscr.chatgpt.settings.EasyCodeState">
+    <option name="projectFiles" value="$PROJECT_DIR$/src/main/java/org/example/nasaweb/controllers/session/LoginServlet.java;C:/Users/Amine/Documents/DAW24-25/DAW/EntornServidor-Pere/UT2/nasaWeb/src/main/java/org/example/nasaweb/model/Approach.java;C:/Users/Amine/Documents/DAW24-25/DAW/EntornServidor-Pere/UT2/nasaWeb/src/main/java/org/example/nasaweb/model/Asteroid.java;C:/Users/Amine/Documents/DAW24-25/DAW/EntornServidor-Pere/UT2/nasaWeb/src/main/java/org/example/nasaweb/model/User.java;C:/Users/Amine/Documents/DAW24-25/DAW/EntornServidor-Pere/UT2/nasaWeb/src/main/java/org/example/nasaweb/HelloServlet.java;C:/Users/Amine/Documents/DAW24-25/DAW/EntornServidor-Pere/UT2/nasaWeb/src/main/webapp/WEB-INF/web.xml;C:/Users/Amine/Documents/DAW24-25/DAW/EntornServidor-Pere/UT2/nasaWeb/pom.xml" />
+  </component>
+</project>
