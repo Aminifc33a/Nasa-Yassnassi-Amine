@@ -1,10 +1,12 @@
-//package org.example.nasaweb.dao;
-//
-//import org.example.nasaweb.model.Approach;
-//
-//public interface ApproachDao {
-//    void create(Approach approach);
-//    Approach findById(Long id);
-//    void update(Approach approach);
-//    void delete(Long id);
-//}
+package org.example.nasaweb.dao;
+
+import org.example.nasaweb.model.Approach;
+import org.example.nasaweb.model.Asteroid;
+
+import java.util.List;
+
+public interface ApproachDao {
+    void create(Approach approach, Asteroid asteroid);
+    List<Approach> findByAsteroidId(long id);
+    //void deleteAll();
+}
