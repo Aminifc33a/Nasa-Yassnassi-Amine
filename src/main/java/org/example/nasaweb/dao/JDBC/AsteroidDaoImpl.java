@@ -124,6 +124,22 @@ public class AsteroidDaoImpl implements AsteroidDao {
         return asteroid;
     }
 
+    @Override
+    public void deleteAll() {
+        //borrar todo de la tabla Asteroids y Approaches
+        String queryAsteroids = "DELETE FROM Asteroids";
+        String queryApproaches = "DELETE FROM Approaches";
+
+        try (Connection conn = connectionManager.getConnection();
+             Statement statement = conn.createStatement()) {
+            statement.executeUpdate(queryApproaches);
+            statement.executeUpdate(queryAsteroids);
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw new RuntimeException("Error deleting all asteroids and approaches: " + e.getMessage(), e);
+        }
+    }
+
     private List<Approach> findApproachesByAsteroidId(Connection conn, long asteroidId) {
         List<Approach> approaches = new ArrayList<>();
         String query = "SELECT * FROM Approaches WHERE asteroid_id = ?";

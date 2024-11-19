@@ -31,7 +31,7 @@ public class Approach {
     @Column(name = "velocity", precision = 15, scale = 8)
     private BigDecimal velocity;
 
-    @Column(name = "distance", precision = 15, scale = 8)
+    @Column(name = "distance", precision = 40, scale = 8)
     private BigDecimal distance;
 
     @Size(max = 255)

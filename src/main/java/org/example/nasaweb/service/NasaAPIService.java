@@ -4,6 +4,8 @@ import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
+import org.example.nasaweb.dao.AsteroidDao;
+import org.example.nasaweb.dao.JDBC.AsteroidDaoImpl;
 import org.example.nasaweb.model.Asteroid;
 import org.example.nasaweb.model.Approach;
 
@@ -17,7 +19,7 @@ import java.util.List;
 public class NasaAPIService {
     private static final String API_URL = "https://api.nasa.gov/neo/rest/v1/feed";
     private static final String API_KEY = "AdeKAyAyJra0WggeuZiYtJAkKZZ3svVo4YnDa1vh";
-
+    private AsteroidDao asteroidDao;
     public List<Asteroid> fetchAsteroidsFromAPI() throws IOException {
         List<Asteroid> asteroids = new ArrayList<>();
 
@@ -53,23 +55,18 @@ public class NasaAPIService {
                 for (JsonElement asteroidElement : asteroidsArray) {
                     JsonObject asteroidJson = asteroidElement.getAsJsonObject();
 
-                    // Mapear datos del asteroide
                     Asteroid asteroid = new Asteroid();
                     asteroid.setId(asteroidJson.get("id").getAsLong());
                     asteroid.setName(asteroidJson.get("name").getAsString());
+                    asteroid.setAbsoluteMagnitude(asteroidJson.get("absolute_magnitude_h").getAsBigDecimal());
                     asteroid.setDiameterKmAverage(asteroidJson.getAsJsonObject("estimated_diameter")
                             .getAsJsonObject("meters").get("estimated_diameter_max").getAsBigDecimal());
                     asteroid.setIsPotentiallyHazardous(asteroidJson.get("is_potentially_hazardous_asteroid").getAsBoolean());
 
-                    // Asegúrate de obtener el absolute_magnitude correctamente
-                    if (asteroidJson.has("absolute_magnitude_h")) {
-                        asteroid.setAbsoluteMagnitude(asteroidJson.get("absolute_magnitude_h").getAsBigDecimal());
-                    }
+                    // Inicializar la lista de acercamientos
+                    asteroid.setApproaches(new ArrayList<>());
 
-                    // Mapear datos de los acercamientos
-                    List<Approach> approaches = new ArrayList<>();
                     JsonArray closeApproachData = asteroidJson.getAsJsonArray("close_approach_data");
-
                     for (JsonElement approachElement : closeApproachData) {
                         JsonObject approachJson = approachElement.getAsJsonObject();
 
@@ -80,38 +77,38 @@ public class NasaAPIService {
                         approach.setDistance(approachJson.getAsJsonObject("miss_distance")
                                 .get("kilometers").getAsBigDecimal());
                         approach.setOrbitingBody(approachJson.get("orbiting_body").getAsString());
-                        approach.setAsteroid(asteroid);  // Establecer la referencia al asteroide
 
-                        approaches.add(approach);
+                        asteroid.getApproaches().add(approach);
                     }
 
-                    asteroid.setApproaches(approaches);
                     asteroids.add(asteroid);
                 }
             }
-        }
 
-        return asteroids;
+            return asteroids;
+        }
     }
 
     public void syncAsteroidsToDatabase() {
+        asteroidDao = new AsteroidDaoImpl();
         try {
-            List<Asteroid> asteroidsFromAPI = fetchAsteroidsFromAPI();
-            AsteroidService asteroidService = new AsteroidService();
+            // Obtener los asteroides desde la API
+            List<Asteroid> nasaAsteroids = fetchAsteroidsFromAPI();
 
-            for (Asteroid asteroid : asteroidsFromAPI) {
-                Asteroid existingAsteroid = asteroidService.findById(asteroid.getId());
+            for (Asteroid asteroid : nasaAsteroids) {
+                // Verificar si el asteroide ya existe en la base de datos
+                if (asteroidDao.findById(asteroid.getId()) == null) {
+                    // Establecer la relación bidireccional
+                    for (Approach approach : asteroid.getApproaches()) {
+                        approach.setAsteroid(asteroid);
+                    }
 
-                if (existingAsteroid == null) {
-                    asteroidService.create(asteroid);  // Esto ahora incluye la inserción de acercamientos
-                    System.out.println("Inserted asteroid and approaches: " + asteroid.getName());
-                } else {
-                    System.out.println("Asteroid already exists in the database: " + asteroid.getName());
+                    // Persistir el asteroide (incluye los acercamientos gracias al cascade)
+                    asteroidDao.create(asteroid);
                 }
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
-
 }
