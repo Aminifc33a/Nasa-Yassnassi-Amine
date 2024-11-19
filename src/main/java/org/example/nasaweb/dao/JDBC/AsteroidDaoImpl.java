@@ -60,14 +60,7 @@ public class AsteroidDaoImpl implements AsteroidDao {
 
             while (resultSet.next()) {
                 Asteroid asteroid = new Asteroid();
-                asteroid.setId(resultSet.getLong("id"));
-                asteroid.setName(resultSet.getString("name"));
-                asteroid.setDiameterKmAverage(resultSet.getBigDecimal("diameter_km_average"));
-                asteroid.setIsPotentiallyHazardous(resultSet.getBoolean("is_potentially_hazardous"));
-                asteroid.setAbsoluteMagnitude(resultSet.getBigDecimal("absolute_magnitude"));
-
-                List<Approach> approaches = approachDao.findByAsteroidId(asteroid.getId());
-                asteroid.setApproaches(approaches);
+                mapAsteroid(resultSet, asteroid);
 
                 asteroids.add(asteroid);
             }
@@ -78,6 +71,8 @@ public class AsteroidDaoImpl implements AsteroidDao {
 
         return asteroids;
     }
+
+
 
     @Override
     public Asteroid findById(long id) {
@@ -92,15 +87,7 @@ public class AsteroidDaoImpl implements AsteroidDao {
 
             if (resultSet.next()) {
                 asteroid = new Asteroid();
-                asteroid.setId(resultSet.getLong("id"));
-                asteroid.setName(resultSet.getString("name"));
-                asteroid.setDiameterKmAverage(resultSet.getBigDecimal("diameter_km_average"));
-                asteroid.setIsPotentiallyHazardous(resultSet.getBoolean("is_potentially_hazardous"));
-                asteroid.setAbsoluteMagnitude(resultSet.getBigDecimal("absolute_magnitude"));
-
-                // Cargar los acercamientos para este asteroide
-                List<Approach> approaches = approachDao.findByAsteroidId(asteroid.getId());
-                asteroid.setApproaches(approaches);
+                mapAsteroid(resultSet, asteroid);
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -124,5 +111,16 @@ public class AsteroidDaoImpl implements AsteroidDao {
             e.printStackTrace();
             throw new RuntimeException("Error deleting all asteroids: " + e.getMessage(), e);
         }
+    }
+
+    private void mapAsteroid(ResultSet resultSet, Asteroid asteroid) throws SQLException {
+        asteroid.setId(resultSet.getLong("id"));
+        asteroid.setName(resultSet.getString("name"));
+        asteroid.setDiameterKmAverage(resultSet.getBigDecimal("diameter_km_average"));
+        asteroid.setIsPotentiallyHazardous(resultSet.getBoolean("is_potentially_hazardous"));
+        asteroid.setAbsoluteMagnitude(resultSet.getBigDecimal("absolute_magnitude"));
+
+        List<Approach> approaches = approachDao.findByAsteroidId(asteroid.getId());
+        asteroid.setApproaches(approaches);
     }
 }
