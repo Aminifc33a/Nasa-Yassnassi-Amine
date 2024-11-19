@@ -7,7 +7,6 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.example.nasaweb.model.Asteroid;
 import org.example.nasaweb.service.AsteroidService;
-import org.example.nasaweb.service.NasaAPIService;
 
 import java.io.IOException;
 import java.util.List;

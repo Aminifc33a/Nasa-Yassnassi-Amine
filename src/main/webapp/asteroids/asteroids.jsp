@@ -17,6 +17,9 @@
     <form action="sync-asteroids" method="post">
         <button type="submit">Sync with NASA</button>
     </form>
+    <form action="${pageContext.request.contextPath}/asteroids/reset" method="post">
+        <button type="submit">Reset Asteroids</button>
+    </form>
 </c:if>
 
 <table>
@@ -31,6 +34,12 @@
             <td>${asteroid.name}</td>
             <td>${asteroid.absoluteMagnitude}</td>
             <td>${asteroid.isPotentiallyHazardous ? "Yes" : "No"}</td>
+            <td>
+                <a href="${pageContext.request.contextPath}/asteroids/details/${asteroid.id}">Details</a>
+                <c:if test="${user.role == 'astronomer'}">
+                <a href="${pageContext.request.contextPath}/asteroids/edit/${asteroid.id}">Edit</a>
+                </c:if>
+            </td>
         </tr>
     </c:forEach>
 </table>
