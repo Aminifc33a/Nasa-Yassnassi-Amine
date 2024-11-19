@@ -1,3 +1,5 @@
+<jsp:useBean id="asteroid" scope="request" type="org.example.nasaweb.model.Asteroid"/>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
   User: Amine
@@ -8,9 +10,32 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Title</title>
+    <title>Asteroid Details</title>
+
 </head>
 <body>
+<h1>Asteroid Details</h1>
+<p>Name: ${asteroid.name}</p>
+<p>Absolute Magnitude: ${asteroid.absoluteMagnitude}</p>
+<p>Diameter: ${asteroid.diameterKmAverage} km</p>
+<p>Is Potentially Hazardous: ${asteroid.isPotentiallyHazardous? 'Yes' : 'No'}</p>
 
+<h2>Approaches</h2>
+<table>
+    <tr>
+        <th>Date</th>
+        <th>Velocity</th>
+        <th>Distance</th>
+        <th>Orbiting Body</th>
+    </tr>
+    <c:forEach items="${asteroid.approaches}" var="approach">
+        <tr>
+            <td>${approach.approachDate}</td>
+            <td>${approach.velocity}</td>
+            <td>${approach.distance}</td>
+            <td>${approach.orbitingBody}</td>
+        </tr>
+    </c:forEach>
+</table
 </body>
 </html>

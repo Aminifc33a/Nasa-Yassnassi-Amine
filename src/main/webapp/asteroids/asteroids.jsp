@@ -35,9 +35,12 @@
             <td>${asteroid.absoluteMagnitude}</td>
             <td>${asteroid.isPotentiallyHazardous ? "Yes" : "No"}</td>
             <td>
-                <a href="${pageContext.request.contextPath}/asteroids/details/${asteroid.id}">Details</a>
+                <a href="${pageContext.request.contextPath}/asteroid?id=${asteroid.id}">Details</a>
                 <c:if test="${user.role == 'astronomer'}">
-                <a href="${pageContext.request.contextPath}/asteroids/edit/${asteroid.id}">Edit</a>
+                    <form action="${pageContext.request.contextPath}/asteroid">
+                        <input type="hidden" name="asteroid" value="${asteroid}">
+                        <button type="submit">Edit</button>
+                    </form>
                 </c:if>
             </td>
         </tr>
