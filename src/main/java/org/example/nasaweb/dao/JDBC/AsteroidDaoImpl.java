@@ -110,5 +110,19 @@ public class AsteroidDaoImpl implements AsteroidDao {
         return asteroid;
     }
 
+    @Override
+    public void deleteAll() {
+        String query = "DELETE FROM Asteroids";
 
+        try (Connection conn = connectionManager.getConnection();
+             Statement statement = conn.createStatement()) {
+
+            System.out.println("Deleting all asteroids...");
+            int rowsAffected = statement.executeUpdate(query);
+            System.out.println("Rows affected: " + rowsAffected);
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw new RuntimeException("Error deleting all asteroids: " + e.getMessage(), e);
+        }
+    }
 }
