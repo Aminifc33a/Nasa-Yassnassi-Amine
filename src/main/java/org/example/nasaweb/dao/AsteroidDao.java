@@ -9,5 +9,7 @@ public interface AsteroidDao {
     void create(Asteroid asteroid);
     List<Asteroid> findAll();
     Asteroid findById(long id);
+    void deleteById(long id);
+    void update(Asteroid asteroid);
     void deleteAll();
 }

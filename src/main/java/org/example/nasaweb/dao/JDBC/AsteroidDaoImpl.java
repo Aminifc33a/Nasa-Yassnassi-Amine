@@ -98,6 +98,16 @@ public class AsteroidDaoImpl implements AsteroidDao {
     }
 
     @Override
+    public void deleteById(long id) {
+        
+    }
+
+    @Override
+    public void update(Asteroid asteroid) {
+
+    }
+
+    @Override
     public void deleteAll() {
         String query = "DELETE FROM Asteroids";
 

@@ -1,4 +1,5 @@
 <jsp:useBean id="asteroid" scope="request" type="org.example.nasaweb.model.Asteroid"/>
+<jsp:useBean id="user" scope="request" type="org.example.nasaweb.model.User"/>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
@@ -37,5 +38,21 @@
         </tr>
     </c:forEach>
 </table
+
+    <c:if test="${user.role == 'astronomer'}">
+        <form action="asteroid" method="post">
+            <input type="hidden" name="id" value="${asteroid.id}">
+            <input type="hidden" name="action" value="edit">
+            <button type="submit">Edit</button>
+        </form>
+
+        <form action="asteroid" method="post">
+            <input type="hidden" name="id" value="${asteroid.id}">
+            <input type="hidden" name="action" value="delete">
+            <button type="submit" onclick="return confirm('Are you sure you want to delete this asteroid?')">Delete</button>
+        </form>
+    </c:if>
+    <p><a href="${pageContext.request.contextPath}/asteroids">Back to Asteroids List</a></p>
+
 </body>
 </html>
