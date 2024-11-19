@@ -96,8 +96,8 @@ public class NasaAPIService {
 
     public void syncAsteroidsToDatabase() {
         try {
-            List<Asteroid> asteroidsFromAPI = fetchAsteroidsFromAPI();
             AsteroidService asteroidService = new AsteroidService();
+            List<Asteroid> asteroidsFromAPI = fetchAsteroidsFromAPI();
 
             for (Asteroid asteroid : asteroidsFromAPI) {
                 Asteroid existingAsteroid = asteroidService.findById(asteroid.getId());

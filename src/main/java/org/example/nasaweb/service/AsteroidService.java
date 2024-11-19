@@ -25,4 +25,7 @@ public AsteroidService(){
     public void create(Asteroid asteroid) {
         asteroidDao.create(asteroid);
     }
+    public void deleteAll() {
+        asteroidDao.deleteAll();
+    }
 }

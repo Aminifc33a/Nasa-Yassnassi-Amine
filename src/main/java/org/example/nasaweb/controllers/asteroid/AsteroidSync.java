@@ -22,7 +22,7 @@ public class AsteroidSync extends HttpServlet {
             nasaAPIService = new NasaAPIService();
             nasaAPIService.syncAsteroidsToDatabase();
             resp.setStatus(HttpServletResponse.SC_OK);
-            resp.getWriter().write("Asteroids synchronized successfully.");
+            resp.sendRedirect(req.getContextPath() + "/asteroids");
         } catch (Exception e) {
             e.printStackTrace(); // Agrega esto para ver el error completo
             resp.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
