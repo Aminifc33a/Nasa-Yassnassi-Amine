@@ -8,5 +8,5 @@ import java.util.List;
 public interface ApproachDao {
     void create(Approach approach, Asteroid asteroid);
     List<Approach> findByAsteroidId(long id);
-    //void deleteAll();
+    void deleteAll();
 }

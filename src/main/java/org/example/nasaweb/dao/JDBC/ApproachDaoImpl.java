@@ -60,5 +60,16 @@ public class ApproachDaoImpl implements ApproachDao {
         return approaches;
     }
 
+    @Override
+    public void deleteAll() {
+        Connection conn = connectionManager.getConnection();
+        String query = "DELETE FROM Approaches";
 
+        try (Statement statement = conn.createStatement()) {
+            statement.executeUpdate(query);
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw new RuntimeException("Error deleting all approaches: " + e.getMessage(), e);
+        }
+    }
 }
