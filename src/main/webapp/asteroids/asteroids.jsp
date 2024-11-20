@@ -29,16 +29,16 @@
         <th>Hazardous</th>
         <th>Actions</th>
     </tr>
-    <c:forEach items="${asteroids}" var="asteroid">
+    <c:forEach items="${asteroids}" var="asteroidServlet">
         <tr>
-            <td>${asteroid.name}</td>
-            <td>${asteroid.absoluteMagnitude}</td>
-            <td>${asteroid.isPotentiallyHazardous ? "Yes" : "No"}</td>
+            <td>${asteroidServlet.name}</td>
+            <td>${asteroidServlet.absoluteMagnitude}</td>
+            <td>${asteroidServlet.isPotentiallyHazardous ? "Yes" : "No"}</td>
             <td>
-                <a href="${pageContext.request.contextPath}/asteroid?id=${asteroid.id}">Details</a>
+                <a href="${pageContext.request.contextPath}/asteroidServlet?id=${asteroidServlet.id}">Details</a>
                 <c:if test="${user.role == 'astronomer'}">
-                    <form action="${pageContext.request.contextPath}/asteroid">
-                        <input type="hidden" name="asteroid" value="${asteroid}">
+                    <form action="${pageContext.request.contextPath}/asteroidServlet">
+                        <input type="hidden" name="asteroidServlet" value="${asteroidServlet}">
                         <button type="submit">Edit</button>
                     </form>
                 </c:if>

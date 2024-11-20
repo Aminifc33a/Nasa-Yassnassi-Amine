@@ -14,16 +14,20 @@ public class AsteroidService {
 public AsteroidService(){
     asteroidDao = new AsteroidDaoImpl();
 }
+    public void create(Asteroid asteroid) {
+        asteroidDao.create(asteroid);
+    }
     public List<Asteroid> findAll() {
         return asteroidDao.findAll();
     }
-
     public Asteroid findById(long id) {
         return asteroidDao.findById(id);
     }
-
-    public void create(Asteroid asteroid) {
-        asteroidDao.create(asteroid);
+    public void update(Asteroid asteroid) {
+        asteroidDao.update(asteroid);
+    }
+    public void deleteById(long id) {
+        asteroidDao.deleteById(id);
     }
     public void deleteAll() {
         asteroidDao.deleteAll();
