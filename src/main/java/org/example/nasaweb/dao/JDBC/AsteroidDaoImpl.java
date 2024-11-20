@@ -99,12 +99,37 @@ public class AsteroidDaoImpl implements AsteroidDao {
 
     @Override
     public void deleteById(long id) {
-        
+        String query = "DELETE FROM Asteroids WHERE id =?";
+
+        try (Connection conn = connectionManager.getConnection();
+             PreparedStatement statement = conn.prepareStatement(query)) {
+
+            System.out.println("Deleting asteroid by id: " + id);
+            statement.setLong(1, id);
+            int rowsAffected = statement.executeUpdate();
+            System.out.println("Rows affected: " + rowsAffected);
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw new RuntimeException("Error deleting asteroid by id: " + e.getMessage(), e);
+        }
     }
 
     @Override
     public void update(Asteroid asteroid) {
-
+        String query = "UPDATE Asteroids SET name =?, absolute_magnitude =?, diameter_km_average =?, is_potentially_hazardous =? WHERE id =?";
+        try (Connection conn = connectionManager.getConnection();
+             PreparedStatement statement = conn.prepareStatement(query)) {
+            System.out.println("Updating asteroid: " + asteroid.getName());
+            statement.setString(1, asteroid.getName());
+            statement.setBigDecimal(2, asteroid.getAbsoluteMagnitude());
+            statement.setBigDecimal(3, asteroid.getDiameterKmAverage());
+            statement.setBoolean(4, asteroid.getIsPotentiallyHazardous());
+            statement.setLong(5, asteroid.getId());
+            int rowsAffected = statement.executeUpdate();
+            System.out.println("Rows affected: " + rowsAffected);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @Override
