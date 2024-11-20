@@ -36,6 +36,7 @@
             <td>${approach.distance}</td>
             <td>${approach.orbitingBody}</td>
         </tr>
+
     </c:forEach>
 </table
 

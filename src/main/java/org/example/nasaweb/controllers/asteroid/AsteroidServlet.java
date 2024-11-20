@@ -84,4 +84,21 @@ public class AsteroidServlet extends HttpServlet {
             response.sendRedirect("/asteroids/asteroids.jsp");
         }
     }
+    private void handleUpdate(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+        AsteroidService asteroidService = new AsteroidService();
+        String id = request.getParameter("id");
+
+        if (id!= null && asteroidService.findById(Long.parseLong(id))!= null) {
+            Asteroid asteroid = asteroidService.findById(Long.parseLong(id));
+            asteroid.setName(request.getParameter("name"));
+            asteroid.setDiameterKmAverage(new BigDecimal(request.getParameter("diameter")));
+            asteroid.setAbsoluteMagnitude(new BigDecimal(request.getParameter("magnitude")));
+            asteroid.setIsPotentiallyHazardous(Boolean.parseBoolean(request.getParameter("hazardous")));
+
+            asteroidService.update(asteroid);
+            response.sendRedirect(request.getContextPath() + "/asteroids");
+        } else {
+            response.sendRedirect("/asteroids/asteroids.jsp");
+        }
+    }
 }
