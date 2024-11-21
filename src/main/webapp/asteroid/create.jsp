@@ -12,6 +12,8 @@
 
     <label for="name">Name:</label>
     <input type="text" id="name" name="name" required><br>
+    <label for="magnitude">Magnitude:</label>
+    <input type="number" id="magnitude" name="magnitude" step="0.01" required><br>
 
     <label for="diameter">Diameter (km):</label>
     <input type="number" id="diameter" name="diameter" step="0.01" required><br>

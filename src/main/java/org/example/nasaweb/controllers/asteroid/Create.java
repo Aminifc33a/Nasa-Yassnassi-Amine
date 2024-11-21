@@ -15,38 +15,34 @@
 
         @Override
         protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-            // Redirigir al formulario de creación
             request.getRequestDispatcher("/asteroid/create.jsp").forward(request, response);
         }
 
         @Override
         protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
             try {
-                // Obtener parámetros del formulario
-                long id = Long.parseLong(request.getParameter("id")); // El usuario lo proporciona
+                long id = Long.parseLong(request.getParameter("id"));
                 String name = request.getParameter("name");
+                BigDecimal magnitude = new BigDecimal(request.getParameter("magnitude"));
                 BigDecimal diameter = new BigDecimal(request.getParameter("diameter"));
                 boolean isPotentiallyHazardous = Boolean.parseBoolean(request.getParameter("hazardous"));
 
-                // Crear objeto Asteroid
                 Asteroid asteroid = new Asteroid();
                 asteroid.setId(id);
                 asteroid.setName(name);
+                asteroid.setAbsoluteMagnitude(magnitude);
                 asteroid.setDiameterKmAverage(diameter);
                 asteroid.setIsPotentiallyHazardous(isPotentiallyHazardous);
 
-                // Guardar asteroide en la base de datos
                 AsteroidService asteroidService = new AsteroidService();
                 asteroidService.create(asteroid);
 
-                // Redirigir a la lista de asteroides
                 response.sendRedirect(request.getContextPath() + "/asteroids");
+
             } catch (NumberFormatException e) {
-                // Manejar errores de formato en el ID o diámetro
                 request.setAttribute("errorMessage", "Invalid number format: " + e.getMessage());
                 request.getRequestDispatcher("/asteroid/create.jsp").forward(request, response);
             } catch (Exception e) {
-                // Manejar otros errores
                 e.printStackTrace();
                 response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
                 request.setAttribute("errorMessage", "Error creating asteroid: " + e.getMessage());
