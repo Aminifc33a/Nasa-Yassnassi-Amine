@@ -42,6 +42,6 @@ public class Create extends HttpServlet {
         ApproachService approachService = new ApproachService();
         Approach approach = new Approach(asteroid, approachDate, velocity, distance, orbitingBody);
         approachService.create(approach, asteroid);
-        response.sendRedirect(request.getContextPath() + "/asteroids?id=" + asteroidId);
+        response.sendRedirect(request.getContextPath() + "/asteroid?id=" + asteroidId);
     }
 }

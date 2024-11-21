@@ -23,9 +23,6 @@
 </c:if>
 <h2>Approaches</h2>
 <p><a href="${pageContext.request.contextPath}/approach/create?asteroidId=${asteroid.id}">Create New Approach</a></p>
-<c:if test="${errorMessage!=null}">
-    <p style="color: red;">${errorMessage}</p>
-</c:if>
 <c:if test="${asteroid.approaches.size() > 0}">
 <table>
     <tr>
@@ -34,7 +31,6 @@
         <th>Distance</th>
         <th>Orbiting Body</th>
     </tr>
-
     <c:forEach items="${asteroid.approaches}" var="approach">
         <tr>
             <td>${approach.approachDate}</td>

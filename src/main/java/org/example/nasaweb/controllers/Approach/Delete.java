@@ -35,10 +35,6 @@ public class Delete extends HttpServlet {
             response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
             request.setAttribute("errorMessage", "Invalid ID format.");
             request.getRequestDispatcher("/error.jsp").forward(request, response);
-        } catch (Exception e) {
-            response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
-            request.setAttribute("errorMessage", "An error occurred while deleting the approach.");
-            request.getRequestDispatcher("/asteroid/asteroidDetails.jsp").forward(request, response);
         }
     }
 }

@@ -46,6 +46,7 @@ public class ApproachDaoImpl implements ApproachDao {
             try (ResultSet resultSet = statement.executeQuery()) {
                 while (resultSet.next()) {
                     Approach approach = new Approach();
+                    approach.setId(resultSet.getInt("id"));
                     approach.setApproachDate(resultSet.getDate("approach_date").toLocalDate());
                     approach.setVelocity(resultSet.getBigDecimal("velocity"));
                     approach.setDistance(resultSet.getBigDecimal("distance"));

@@ -22,6 +22,8 @@
     <input type="number" id="distance" name="distance" required><br>
     <label for="velocity">Velocity:</label>
     <input type="number" id="velocity" name="velocity"><br>
+    <label for="orbitingBody">Orbiting body:</label>
+    <input type="text" id="orbitingBody" name="orbitingBody" required><br>
     <input type="submit" value="Create Approach">
     <a href="${pageContext.request.contextPath}/asteroids/${asteroidId}">Cancel</a>
     <c:if test="${errorMessage!=null}">
