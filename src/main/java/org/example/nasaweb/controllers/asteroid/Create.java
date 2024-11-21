@@ -46,7 +46,7 @@
                 e.printStackTrace();
                 response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
                 request.setAttribute("errorMessage", "Error creating asteroid: " + e.getMessage());
-                request.getRequestDispatcher("/error.jsp").forward(request, response);
+                request.getRequestDispatcher("/asteroid/create.jsp").forward(request, response);
             }
         }
     }

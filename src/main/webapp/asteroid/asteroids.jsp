@@ -38,9 +38,10 @@
             <td>
                 <a href="${pageContext.request.contextPath}/asteroid?id=${asteroid.id}">Details</a>
                 <c:if test="${user.role == 'astronomer'}">
-                    <form action="${pageContext.request.contextPath}/asteroid/update?${asteroid.id}" method="get">
-                        <input type="hidden" name="asteroid" value="${asteroid}">
-                        <button type="submit">Edit</button>
+                    <a href="${pageContext.request.contextPath}/asteroid/update?id=${asteroid.id}">Edit</a>
+                    <form action="${pageContext.request.contextPath}/asteroid/delete" method="post">
+                        <input type="hidden" name="id" value="${asteroid.id}">
+                        <button type="submit" onclick="return confirm('Are you sure you want to delete this asteroid?')">Delete</button>
                     </form>
                 </c:if>
             </td>

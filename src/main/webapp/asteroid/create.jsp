@@ -24,6 +24,9 @@
 
     <button type="submit">Create</button>
     <a href="${pageContext.request.contextPath}/asteroids">Back to Asteroids List</a>
+    <c:if test="${!empty errorMessage}">
+        <p style="color: red;">${errorMessage}</p>
+    </c:if>
 </form>
 </body>
 </html>
