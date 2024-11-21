@@ -26,7 +26,7 @@ public class AsteroidsList extends HttpServlet {
             req.setAttribute("asteroids", asteroids);
 
             // Redirigir al archivo JSP
-            req.getRequestDispatcher("/asteroids/asteroids.jsp").forward(req, resp);
+            req.getRequestDispatcher("/asteroid/asteroids.jsp").forward(req, resp);
         } catch (Exception e) {
             resp.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
             resp.getWriter().write("Error retrieving asteroids: " + e.getMessage());

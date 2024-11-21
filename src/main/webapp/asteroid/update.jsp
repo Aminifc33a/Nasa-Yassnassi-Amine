@@ -1,4 +1,3 @@
-<jsp:useBean id="asteroid" scope="request" type="org.example.nasaweb.model.Asteroid"/>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
@@ -15,7 +14,7 @@
 <body>
 <h1>Edit Asteroid</h1>
 
-<form action="${pageContext.request.contextPath}/asteroid" method="post">
+<form action="${pageContext.request.contextPath}/asteroid/update" method="post">
     <input type="hidden" name="id" value="${asteroid.id}">
     <label for="name">Name:</label>
     <input type="text" id="name" name="name" value="${asteroid.name}" required><br>
@@ -25,11 +24,6 @@
     <input type="checkbox" id="hazardous" name="hazardous"
            value="true" ${asteroid.isPotentiallyHazardous? 'checked' : ''}><br>
     <input type="hidden" name="action" value="update">
-
-    <form action="${pageContext.request.contextPath}/approaches/create" method="get">
-        <input type="hidden" name="asteroidId" value="${asteroid.id}">
-        <button type="submit">Add Approach</button>
-    </form>
     <button type="submit">Save</button>
     <a href="${pageContext.request.contextPath}/asteroids">Cancel</a>
 </form>

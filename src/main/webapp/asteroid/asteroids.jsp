@@ -20,6 +20,7 @@
     <form action="${pageContext.request.contextPath}/asteroids/reset" method="post">
         <button type="submit">Reset Asteroids</button>
     </form>
+    <a href="${pageContext.request.contextPath}/asteroids/create">Add Asteroid</a>
 </c:if>
 
 <table>
@@ -29,15 +30,15 @@
         <th>Hazardous</th>
         <th>Actions</th>
     </tr>
-    <c:forEach items="${asteroids}" var="asteroidServlet">
+    <c:forEach items="${asteroids}" var="asteroid">
         <tr>
-            <td>${asteroidServlet.name}</td>
-            <td>${asteroidServlet.absoluteMagnitude}</td>
-            <td>${asteroidServlet.isPotentiallyHazardous ? "Yes" : "No"}</td>
+            <td>${asteroid.name}</td>
+            <td>${asteroid.absoluteMagnitude}</td>
+            <td>${asteroid.isPotentiallyHazardous ? "Yes" : "No"}</td>
             <td>
-                <a href="${pageContext.request.contextPath}/asteroid?id=${asteroidServlet.id}">Details</a>
+                <a href="${pageContext.request.contextPath}/asteroid?id=${asteroid.id}">Details</a>
                 <c:if test="${user.role == 'astronomer'}">
-                    <form action="${pageContext.request.contextPath}/asteroid">
+                    <form action="${pageContext.request.contextPath}/asteroid/update?${asteroid.id}" method="get">
                         <input type="hidden" name="asteroid" value="${asteroid}">
                         <button type="submit">Edit</button>
                     </form>

@@ -1,5 +1,3 @@
-<jsp:useBean id="asteroid" scope="request" type="org.example.nasaweb.model.Asteroid"/>
-<jsp:useBean id="user" scope="request" type="org.example.nasaweb.model.User"/>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
