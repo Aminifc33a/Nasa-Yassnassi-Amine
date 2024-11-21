@@ -1,32 +1,52 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<!DOCTYPE html>
 <html>
 <head>
     <title>Edit Asteroid</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
-<body>
-<h1>Edit Asteroid</h1>
-
-<form action="${pageContext.request.contextPath}/asteroid/update" method="post">
-    <input type="hidden" name="id" value="${asteroid.id}">
-
-    <label for="name">Name:</label>
-    <input type="text" id="name" name="name" value="${asteroid.name}" required><br>
-    <label for="magnitude">Magnitude:</label>
-    <input type="number" id="magnitude" name="magnitude" value="${asteroid.absoluteMagnitude}" step="0.01" required><br>
-
-    <label for="diameter">Diameter (km):</label>
-    <input type="number" id="diameter" name="diameter" value="${asteroid.diameterKmAverage}" step="0.01" required><br>
-
-    <label for="hazardous">Is hazardous:</label>
-    <input type="checkbox" id="hazardous" name="hazardous" value="true"
-           <c:if test="${asteroid.isPotentiallyHazardous}">checked</c:if>><br>
-
-    <button type="submit">Save</button>
-    <a href="${pageContext.request.contextPath}/asteroids">Cancel</a>
-    <c:if test="${!empty errorMessage}">
-        <p style="color: red;">${errorMessage}</p>
-    </c:if>
-</form>
+<body class="bg-light">
+<div class="container mt-5">
+    <div class="card shadow">
+        <div class="card-header text-center">
+            <h1>Edit Asteroid</h1>
+        </div>
+        <div class="card-body">
+            <form action="${pageContext.request.contextPath}/asteroid/update" method="post">
+                <input type="hidden" name="id" value="${asteroid.id}">
+                <div class="mb-3">
+                    <label for="name" class="form-label">Name:</label>
+                    <input type="text" id="name" name="name" class="form-control" value="${asteroid.name}" required>
+                </div>
+                <div class="mb-3">
+                    <label for="magnitude" class="form-label">Magnitude:</label>
+                    <input type="number" id="magnitude" name="magnitude" class="form-control" value="${asteroid.absoluteMagnitude}" step="0.01" required>
+                </div>
+                <div class="mb-3">
+                    <label for="diameter" class="form-label">Diameter (km):</label>
+                    <input type="number" id="diameter" name="diameter" class="form-control" value="${asteroid.diameterKmAverage}" step="0.01" required>
+                </div>
+                <div class="mb-3 form-check">
+                    <input type="checkbox" id="hazardous" name="hazardous" value="true" class="form-check-input"
+                           <c:if test="${asteroid.isPotentiallyHazardous}">checked</c:if>>
+                    <label for="hazardous" class="form-check-label">Is hazardous</label>
+                </div>
+                <div class="d-flex justify-content-between">
+                    <button type="submit" class="btn btn-primary">Save</button>
+                    <a href="${pageContext.request.contextPath}/asteroids" class="btn btn-secondary">Cancel</a>
+                </div>
+                <c:if test="${!empty errorMessage}">
+                    <div class="alert alert-danger mt-3" role="alert">
+                            ${errorMessage}
+                    </div>
+                </c:if>
+            </form>
+        </div>
+    </div>
+</div>
+<!-- Bootstrap JS Bundle -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
