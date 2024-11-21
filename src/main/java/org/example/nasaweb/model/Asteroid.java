@@ -41,7 +41,7 @@ public class Asteroid {
     @Column(name = "is_potentially_hazardous", nullable = false)
     private Boolean isPotentiallyHazardous = false;
 
-    @OneToMany(mappedBy = "asteroid", cascade = CascadeType.PERSIST)
+    @OneToMany(mappedBy = "asteroid", cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
     private List<Approach> approaches = new ArrayList<>();
 
 

@@ -1,6 +1,7 @@
 package org.example.nasaweb.dao.JPA;
 
 import jakarta.persistence.EntityManager;
+import jakarta.persistence.NoResultException;
 import jakarta.persistence.TypedQuery;
 import org.example.nasaweb.dao.AsteroidDao;
 import org.example.nasaweb.model.Asteroid;
@@ -42,11 +43,18 @@ public class AsteroidDaoImpl implements AsteroidDao {
     public Asteroid findById(long id) {
         EntityManager em = NasaManager.getEntityManager();
         try {
-            return em.find(Asteroid.class, id);
+            // Carga explícita de enfoques usando JOIN FETCH
+            String jpql = "SELECT a FROM Asteroid a LEFT JOIN FETCH a.approaches WHERE a.id = :id";
+            TypedQuery<Asteroid> query = em.createQuery(jpql, Asteroid.class);
+            query.setParameter("id", id);
+            return query.getSingleResult();
+        } catch (NoResultException e) {
+            return null;
         } finally {
             em.close();
         }
     }
+
 
     @Override
     public void deleteById(long id) {
@@ -66,6 +74,7 @@ public class AsteroidDaoImpl implements AsteroidDao {
             em.close();
         }
     }
+
 
     @Override
     public void update(Asteroid asteroid) {

@@ -1,7 +1,8 @@
 package org.example.nasaweb.service;
 
 import org.example.nasaweb.dao.AsteroidDao;
-import org.example.nasaweb.dao.JDBC.AsteroidDaoImpl;
+//import org.example.nasaweb.dao.JDBC.AsteroidDaoImpl;
+import org.example.nasaweb.dao.JPA.AsteroidDaoImpl;
 import org.example.nasaweb.model.Asteroid;
 
 import javax.inject.Inject;

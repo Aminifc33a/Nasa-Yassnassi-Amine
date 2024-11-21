@@ -1,7 +1,8 @@
 package org.example.nasaweb.service;
 
 import org.example.nasaweb.dao.ApproachDao;
-import org.example.nasaweb.dao.JDBC.ApproachDaoImpl;
+//import org.example.nasaweb.dao.JDBC.ApproachDaoImpl;
+import org.example.nasaweb.dao.JPA.ApproachDaoImpl;
 import org.example.nasaweb.model.Approach;
 import org.example.nasaweb.model.Asteroid;
 
