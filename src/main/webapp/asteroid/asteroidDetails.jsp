@@ -18,8 +18,15 @@
 <p>Absolute Magnitude: ${asteroid.absoluteMagnitude}</p>
 <p>Diameter: ${asteroid.diameterKmAverage} km</p>
 <p>Is Potentially Hazardous: ${asteroid.isPotentiallyHazardous? 'Yes' : 'No'}</p>
-
+<c:if test="${!empty errorMessage}">
+    <p style="color: red;">${errorMessage}</p>
+</c:if>
 <h2>Approaches</h2>
+<p><a href="${pageContext.request.contextPath}/approach/create?asteroidId=${asteroid.id}">Create New Approach</a></p>
+<c:if test="${errorMessage!=null}">
+    <p style="color: red;">${errorMessage}</p>
+</c:if>
+<c:if test="${asteroid.approaches.size() > 0}">
 <table>
     <tr>
         <th>Date</th>
@@ -27,17 +34,24 @@
         <th>Distance</th>
         <th>Orbiting Body</th>
     </tr>
+
     <c:forEach items="${asteroid.approaches}" var="approach">
         <tr>
             <td>${approach.approachDate}</td>
             <td>${approach.velocity}</td>
             <td>${approach.distance}</td>
             <td>${approach.orbitingBody}</td>
+            <td>
+                <form action="${pageContext.request.contextPath}/approach/delete" method="post">
+                    <input type="hidden" name="asteroidId" value="${asteroid.id}">
+                    <input type="hidden" name="approachId" value="${approach.id}">
+                    <button type="submit" onclick="return confirm('Are you sure you want to delete this approach?')">Delete</button>
+                </form>
+            </td>
         </tr>
-
     </c:forEach>
 </table
+</c:if>
     <p><a href="${pageContext.request.contextPath}/asteroids">Back to Asteroids List</a></p>
-
 </body>
 </html>

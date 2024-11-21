@@ -12,22 +12,21 @@
     <title>Create Approach</title>
 </head>
 <body>
-    <h1>Create Approach</h1>
-    <form action="${pageContext.request.contextPath}/approaches/create" method="post">
-        <label for="asteroidId">Asteroid ID:</label>
-        <input type="number" id="asteroidId" name="asteroidId" value="${asteroid.id}" required><br>
-        <label for="date">Approach Date:</label><br>
-        <input type="date" id="date" name="date" required><br>
-        <label for="distance">Distance (km):</label><br>
-        <input type="number" id="distance" name="distance" required><br>
-        <label for="velocity">Velocity:</label>
-        <input type="number" id="velocity" name="velocity"><br>
-        <input type="hidden" name="asteroidId" value="${asteroid.id}">
-        <input type="submit" value="Create Approach">
-        <a href="${pageContext.request.contextPath}/asteroids/${asteroid.id}">Cancel</a>
-        <c:if test="${errorMessage!=null}">
-            <p style="color: red;">${errorMessage}</p>
-            </c:if>
-        </form>
+<h1>Create Approach</h1>
+<form action="${pageContext.request.contextPath}/approach/create" method="post">
+    <label for="asteroidId">Asteroid ID:</label>
+    <input type="number" id="asteroidId" name="asteroidId" value="${asteroidId}" required readonly><br>
+    <label for="date">Approach Date:</label><br>
+    <input type="date" id="date" name="date" required><br>
+    <label for="distance">Distance (km):</label><br>
+    <input type="number" id="distance" name="distance" required><br>
+    <label for="velocity">Velocity:</label>
+    <input type="number" id="velocity" name="velocity"><br>
+    <input type="submit" value="Create Approach">
+    <a href="${pageContext.request.contextPath}/asteroids/${asteroidId}">Cancel</a>
+    <c:if test="${errorMessage!=null}">
+        <p style="color: red;">${errorMessage}</p>
+    </c:if>
+</form>
 </body>
 </html>
