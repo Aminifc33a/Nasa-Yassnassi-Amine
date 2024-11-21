@@ -30,7 +30,7 @@ public class RegisterServlet extends HttpServlet {
         try {
             userService.create(user);
             request.getSession().setAttribute("user", user);
-            response.sendRedirect(request.getContextPath() + "/index.jsp");
+            response.sendRedirect(request.getContextPath() + "/asteroids");
             request.setAttribute("error", null);
         } catch (Exception e){
             request.setAttribute("error", "Error creating the account");

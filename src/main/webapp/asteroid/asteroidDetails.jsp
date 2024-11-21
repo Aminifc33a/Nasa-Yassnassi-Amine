@@ -22,7 +22,9 @@
     <p style="color: red;">${errorMessage}</p>
 </c:if>
 <h2>Approaches</h2>
+<c:if test="${user.role == 'astronomer'}">
 <p><a href="${pageContext.request.contextPath}/approach/create?asteroidId=${asteroid.id}">Create New Approach</a></p>
+</c:if>
 <c:if test="${asteroid.approaches.size() > 0}">
 <table>
     <tr>
@@ -37,6 +39,7 @@
             <td>${approach.velocity}</td>
             <td>${approach.distance}</td>
             <td>${approach.orbitingBody}</td>
+            <c:if test="${user.role == 'astronomer'}">
             <td>
                 <form action="${pageContext.request.contextPath}/approach/delete" method="post">
                     <input type="hidden" name="asteroidId" value="${asteroid.id}">
@@ -44,6 +47,7 @@
                     <button type="submit" onclick="return confirm('Are you sure you want to delete this approach?')">Delete</button>
                 </form>
             </td>
+            </c:if>
         </tr>
     </c:forEach>
 </table

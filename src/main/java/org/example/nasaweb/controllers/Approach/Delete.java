@@ -12,24 +12,20 @@ import java.io.IOException;
 public class Delete extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         try {
-            // Validar y obtener approachId
             String approachIdParam = request.getParameter("approachId");
             if (approachIdParam == null || approachIdParam.isEmpty()) {
                 throw new IllegalArgumentException("Approach ID is missing or empty.");
             }
             long approachId = Long.parseLong(approachIdParam);
 
-            // Obtener asteroidId
             String asteroidId = request.getParameter("asteroidId");
             if (asteroidId == null || asteroidId.isEmpty()) {
                 throw new IllegalArgumentException("Asteroid ID is missing or empty.");
             }
 
-            // Eliminar el enfoque
             ApproachService approachService = new ApproachService();
             approachService.deleteById(approachId);
 
-            // Redirigir de vuelta a los detalles del asteroide
             response.sendRedirect(request.getContextPath() + "/asteroid?id=" + asteroidId);
         } catch (NumberFormatException e) {
             response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
