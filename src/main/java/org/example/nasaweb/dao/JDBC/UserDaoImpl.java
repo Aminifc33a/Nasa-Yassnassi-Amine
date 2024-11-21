@@ -20,15 +20,16 @@ public class UserDaoImpl implements UserDao {
 
     @Override
     public void create(User user) {
-        String query = "INSERT INTO Users (username, password) VALUES (?, ?)";
+        String query = "INSERT INTO Users (username, role,password) VALUES (?,?, ?)";
         Connection conn = connectionManager.getConnection();
         try (PreparedStatement statement = conn.prepareStatement(query)) {
-            // Hash the password before storing it
+
             String hashedPassword = BCrypt.hashpw(user.getPassword(), BCrypt.gensalt());
             user.setPassword(hashedPassword);
 
             statement.setString(1, user.getUsername());
-            statement.setString(2, hashedPassword);
+            statement.setString(2, user.getRole());
+            statement.setString(3, hashedPassword);
 
             statement.executeUpdate();
         } catch (SQLException e) {
@@ -47,12 +48,12 @@ public class UserDaoImpl implements UserDao {
             try (ResultSet resultSet = statement.executeQuery()) {
                 if (resultSet.next()) {
                     String storedPassword = resultSet.getString("password");
-                    // Check if the password matches
+
                     if (BCrypt.checkpw(password, storedPassword)) {
                         User user = new User();
                         user.setId(resultSet.getLong("id"));
                         user.setUsername(resultSet.getString("username"));
-                        user.setPassword(storedPassword); // Optional: You may omit setting the password
+                        user.setPassword(storedPassword);
                         return user;
                     }
                 }
@@ -61,7 +62,7 @@ public class UserDaoImpl implements UserDao {
             e.printStackTrace();
             throw new RuntimeException("Error fetching user: " + e.getMessage(), e);
         }
-        return null; // Return null if the user is not found or the password doesn't match
+        return null;
     }
 
     @Override
