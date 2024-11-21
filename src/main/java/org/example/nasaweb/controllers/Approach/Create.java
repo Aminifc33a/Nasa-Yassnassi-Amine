@@ -14,12 +14,12 @@ import java.io.IOException;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
-@WebServlet(name = "Approaches", value = "/approaches/create")
-public class ApproachCreate extends HttpServlet {
+@WebServlet(name = "CreateApproach", value = "/approaches/create")
+public class Create extends HttpServlet {
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.getRequestDispatcher("/Approaches/approachCreate.jsp").forward(request, response);
+        request.getRequestDispatcher("/Approach/create.jsp").forward(request, response);
     }
-    public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
         long asteroidId = Long.parseLong(request.getParameter("asteroidId"));
         LocalDate approachDate = LocalDate.parse(request.getParameter("approachDate"));
         BigDecimal velocity = new BigDecimal(request.getParameter("velocity"));

@@ -21,7 +21,9 @@ public class ApproachService {
     public List<Approach> findByAsteroidId(long id) {
         return approachDao.findByAsteroidId(id);
     }
-
+    public void deleteById(long id) {
+        approachDao.deleteById(id);
+    }
     public void deleteAll() {
         approachDao.deleteAll();
     }

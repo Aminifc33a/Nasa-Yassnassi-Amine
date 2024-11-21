@@ -61,6 +61,20 @@ public class ApproachDaoImpl implements ApproachDao {
     }
 
     @Override
+    public void deleteById(long id) {
+        Connection conn = connectionManager.getConnection();
+        String query = "DELETE FROM Approaches WHERE id =?";
+
+        try (PreparedStatement statement = conn.prepareStatement(query)) {
+            statement.setLong(1, id);
+            statement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw new RuntimeException("Error deleting approach by id: " + e.getMessage(), e);
+        }
+    }
+
+    @Override
     public void deleteAll() {
         Connection conn = connectionManager.getConnection();
         String query = "DELETE FROM Approaches";

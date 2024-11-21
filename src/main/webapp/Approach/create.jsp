@@ -14,6 +14,8 @@
 <body>
     <h1>Create Approach</h1>
     <form action="${pageContext.request.contextPath}/approaches/create" method="post">
+        <label for="asteroidId">Asteroid ID:</label>
+        <input type="number" id="asteroidId" name="asteroidId" value="${asteroid.id}" required><br>
         <label for="date">Approach Date:</label><br>
         <input type="date" id="date" name="date" required><br>
         <label for="distance">Distance (km):</label><br>

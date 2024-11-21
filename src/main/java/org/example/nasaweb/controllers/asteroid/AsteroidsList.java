@@ -19,13 +19,9 @@ public class AsteroidsList extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         try {
-            // Obtener asteroides desde la API de NASA
-                List<Asteroid> asteroids = asteroidService.findAll();
+            List<Asteroid> asteroids = asteroidService.findAll();
 
-            // Enviar la lista de asteroides al JSP
             req.setAttribute("asteroids", asteroids);
-
-            // Redirigir al archivo JSP
             req.getRequestDispatcher("/asteroid/asteroids.jsp").forward(req, resp);
         } catch (Exception e) {
             resp.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
