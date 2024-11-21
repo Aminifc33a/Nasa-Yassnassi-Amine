@@ -35,10 +35,10 @@
             <td>${asteroidServlet.absoluteMagnitude}</td>
             <td>${asteroidServlet.isPotentiallyHazardous ? "Yes" : "No"}</td>
             <td>
-                <a href="${pageContext.request.contextPath}/asteroidServlet?id=${asteroidServlet.id}">Details</a>
+                <a href="${pageContext.request.contextPath}/asteroid?id=${asteroidServlet.id}">Details</a>
                 <c:if test="${user.role == 'astronomer'}">
-                    <form action="${pageContext.request.contextPath}/asteroidServlet">
-                        <input type="hidden" name="asteroidServlet" value="${asteroidServlet}">
+                    <form action="${pageContext.request.contextPath}/asteroid">
+                        <input type="hidden" name="asteroid" value="${asteroid}">
                         <button type="submit">Edit</button>
                     </form>
                 </c:if>

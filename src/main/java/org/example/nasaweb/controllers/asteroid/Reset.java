@@ -11,7 +11,7 @@ import org.example.nasaweb.service.AsteroidService;
 import java.io.IOException;
 
 @WebServlet(name = "AsteroidReset", value = "/asteroids/reset")
-public class AsteroidReset extends HttpServlet {
+public class Reset extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         AsteroidService asteroidService = new AsteroidService();

@@ -11,7 +11,7 @@ import javax.inject.Inject;
 import java.io.IOException;
 
 @WebServlet(name = "AsteroidSync", value = "/sync-asteroids")
-public class AsteroidSync extends HttpServlet {
+public class Sync extends HttpServlet {
 
     @Inject
     private NasaAPIService nasaAPIService;

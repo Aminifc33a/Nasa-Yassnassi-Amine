@@ -12,7 +12,7 @@ import java.io.IOException;
 import java.util.List;
 
 @WebServlet(name = "Asteroids", value = "/asteroids")
-public class Asteroids extends HttpServlet {
+public class AsteroidsList extends HttpServlet {
 
     private final AsteroidService asteroidService = new AsteroidService();
 

@@ -1,19 +1,22 @@
+<jsp:useBean id="asteroid" scope="request" type="org.example.nasaweb.model.Asteroid"/>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
   User: Amine
-  Date: 20/11/2024
-  Time: 21:25
+  Date: 12/11/2024
+  Time: 13:55
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Create Asteroid</title>
+    <title>Asteroid Edit</title>
 </head>
 <body>
-<h1>Create a asteroid</h1>
+<h1>Edit Asteroid</h1>
 
 <form action="${pageContext.request.contextPath}/asteroid" method="post">
+    <input type="hidden" name="id" value="${asteroid.id}">
     <label for="name">Name:</label>
     <input type="text" id="name" name="name" value="${asteroid.name}" required><br>
     <label for="diameter">Diameter (km):</label>
@@ -21,9 +24,14 @@
     <label for="hazardous">Is hazardous:</label>
     <input type="checkbox" id="hazardous" name="hazardous"
            value="true" ${asteroid.isPotentiallyHazardous? 'checked' : ''}><br>
-    <input type="hidden" name="action" value="create">
-    <button type="submit">Create</button>
-    <a href="${pageContext.request.contextPath}/asteroids">Back to Asteroids List</a>
+    <input type="hidden" name="action" value="update">
+
+    <form action="${pageContext.request.contextPath}/approaches/create" method="get">
+        <input type="hidden" name="asteroidId" value="${asteroid.id}">
+        <button type="submit">Add Approach</button>
+    </form>
+    <button type="submit">Save</button>
+    <a href="${pageContext.request.contextPath}/asteroids">Cancel</a>
 </form>
 </body>
 </html>

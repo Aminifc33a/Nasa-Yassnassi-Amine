@@ -3,17 +3,27 @@ package org.example.nasaweb.model;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
-
-@Getter
-@Setter
+@AllArgsConstructor
+@NoArgsConstructor
+@Data
 @Entity
 @Table(name = "Approaches")
 public class Approach {
+    public Approach(Asteroid asteroid, LocalDate approachDate, BigDecimal velocity, BigDecimal distance, String orbitingBody) {
+        this.asteroid = asteroid;
+        this.approachDate = approachDate;
+        this.velocity = velocity;
+        this.distance = distance;
+        this.orbitingBody = orbitingBody;
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
